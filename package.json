@@ -1,0 +1,16 @@
+{
+  "name": "mongoose-easy-crud",
+  "version": "1.0.1",
+  "description": "Package to create easy CRUD with mongoose and Swagger",
+  "main": "index.js",
+  "scripts": {
+    "start": "node lib/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Julio Villagrana Martinez",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  }
+}

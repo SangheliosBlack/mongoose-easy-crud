@@ -1,0 +1,5 @@
+# Archivos generados por Node.js
+node_modules/
+
+# Otros archivos y carpetas generados por npm
+package-lock.json
