@@ -1,8 +1,11 @@
 {
   "name": "mongoose-easy-crud",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Package to create easy CRUD with mongoose and Swagger",
   "main": "index.js",
+  "bin": {
+    "generate-routes": "./lib/index.js"
+  },
   "scripts": {
     "start": "node lib/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,5 +15,9 @@
   "dependencies": {
     "fs": "^0.0.1-security",
     "path": "^0.12.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SangheliosBlack/mongoose-easy-crud"
   }
 }
