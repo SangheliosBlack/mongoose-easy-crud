@@ -1,44 +1,115 @@
-# Mongoose Easy CRUD Setup Script
+# mongoose-easy-crud
 
-echo "# Mongoose Easy CRUD
+Mongoose Easy CRUD is a utility library for simplifying CRUD (Create, Read, Update, Delete) operations with Mongoose in MongoDB.
 
-Este paquete proporciona una utilidad para generar fácilmente rutas y controladores CRUD (Create, Read, Update, Delete) para modelos de Mongoose en Node.js. Además, genera automáticamente archivos de rutas y controladores basados en el nombre del modelo proporcionado como argumento.
+[![npm version](https://badge.fury.io/js/mongoose-easy-crud.svg)](https://www.npmjs.com/package/mongoose-easy-crud)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## Instalación
 
-\`\`\`bash
+
+[![npm](https://nodei.co/npm/mongoose-easy-crud.png)](https://www.npmjs.com/package/https://www.npmjs.com/package/mongoose-easy-crud)
+
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Installation
+
+First install [Node.js](http://nodejs.org/) and [MongoDB](https://www.mongodb.org/downloads). Then:
+
+```bash
 npm install -g mongoose-easy-crud
-\`\`\`
+```
 
-## Uso
+## Usage
 
-\`\`\`bash
-# Después de instalar el paquete, utiliza el script generate-routes para generar automáticamente rutas y controladores para un modelo específico.
-# Asegúrate de tener la estructura de carpetas adecuada y sigue los siguientes pasos:
+Create a Mongoose model with the required structure. For example, let's create an "Auto" model:
 
-generate-routes NOMBRE_DEL_MODELO
-\`\`\`
+```javascript
+// Auto.js
 
-Reemplaza \`NOMBRE_DEL_MODELO\` con el nombre de tu modelo de Mongoose.
+const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
 
-## Ejemplo
+const AutoSchema = Schema(
+  {
+    brand: {
+      type: String,
+      required: true,
+    },
+    model: {
+      type: String,
+      required: true,
+    },
+    year: {
+      type: Number,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-\`\`\`bash
-# Supongamos que tienes un modelo llamado "Usuario". Puedes generar las rutas y controladores con el siguiente comando:
+AutoSchema.statics.getFieldsInfo = function () {
+  return Object.keys(this.schema.paths).map((field) => ({
+    name: field,
+    properties: this.schema.paths[field],
+  }));
+};
 
-generate-routes Usuario
-\`\`\`
+const Auto = model("Autos", AutoSchema);
 
-Esto creará archivos de rutas y controladores en las carpetas correspondientes.
+module.exports = Auto;
 
-## Contribuir
+```
 
-\`\`\`bash
-# Si encuentras errores o tienes sugerencias de mejora, no dudes en abrir un problema o enviar una solicitud de extracción.
-\`\`\`
+Now, you can use mongoose-easy-crud to simplify CRUD operations with your Mongoose models.
 
-## Licencia
+```sh
+generate-crud auto
+```
 
-\`\`\`bash
-# Este proyecto está bajo la Licencia ISC. Ver el archivo LICENSE para más detalles.
-\`\`\`"
+
+## Configuration
+
+To use `mongoose-easy-crud`, ensure your project has the following folder structure:
+
+- **`project-root/`**: Your project's root directory.
+- **`src/`**: The source folder that holds your application's code.
+  - **`models/`**: A subfolder where you store your Mongoose model files.
+    - **`YourModel.js`**: Example Mongoose model file.
+
+## Contributing
+
+Thank you for considering contributing to Mongoose Easy CRUD! Contributions are highly appreciated.
+
+### How to Contribute
+
+1. Fork the repository.
+2. Clone your forked repository: `git clone https://github.com/your-username/mongoose-easy-crud.git`.
+3. Install dependencies: `npm install`.
+4. Create a new branch for your feature: `git checkout -b feature/your-feature`.
+5. Make your changes and test them thoroughly.
+6. Commit your changes: `git commit -m 'Add your feature'`.
+7. Push your branch to your forked repository: `git push origin feature/your-feature`.
+8. Submit a pull request.
+
+### Coding Guidelines
+
+Please follow the coding guidelines outlined in the project. If in doubt, refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file.
+
+### Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project, you agree to abide by its terms.
+
+Thank you for contributing to Mongoose Easy CRUD!
+
+## License
+
+This project is licensed under the [MIT License](LICENSE.md) - see the [LICENSE.md](LICENSE.md) file for details.
+
